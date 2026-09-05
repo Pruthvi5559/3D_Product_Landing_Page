@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from "@gsap/react";
 
 const Showcase = () => {
-    const isTablet = useMediaQuery({ query: '(max-width: 1024)'});
+    const isTablet = useMediaQuery({ query: '(max-width: 1024px)'});
 
     useGSAP(() => {
         if(!isTablet){
@@ -20,7 +20,7 @@ const Showcase = () => {
             timeline
                 .to('.mask img', {
                     transform: 'scale(1.1)'
-                }).to('connect', { opacity: 1, y: 0, ease: 'power1.in' });
+                }).to('.content', { opacity: 1, y: 0, ease: 'power1.in' });
         }
     }, [isTablet])
 
