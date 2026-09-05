@@ -14,6 +14,7 @@ import useMacbookStore from "../../store";
 import {noChangeParts} from "../../constants/index.js";
 import * as THREE from 'three'
 import { useEffect } from 'react';
+import { Color, SRGBColorSpace } from 'three';
 
 export default function MacbookModel16(props) {
   const { color } = useMacbookStore();
@@ -21,13 +22,15 @@ export default function MacbookModel16(props) {
   const { nodes, materials, scene } = useGLTF('/models/macbook-16-transformed.glb');
 
   const texture = useTexture('/screen.png');
+  texture.colorSpace = SRGBColorSpace;
+  texture.needsUpdate = true;
 
   useEffect(() => {
     scene.traverse((child) => {
       if(child.isMesh){
         //Change color only if the part name is NOT noChangeParts
         if(!noChangeParts.includes(child.name)){
-          child.material.color = new THREE.Color(color);
+          child.material.color = new Color(color);
         }
       }
     })
