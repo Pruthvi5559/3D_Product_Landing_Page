@@ -4,6 +4,7 @@ import NavBar from './components/NavBar.jsx'
 import ProductViewer from './components/ProductViewer.jsx'
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/all";
+import Showcase from './components/Showcase.jsx';
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -11,9 +12,10 @@ function App() {
 
   return (
     <main>
-      <NavBar></NavBar>
-      <Hero></Hero>
-      <ProductViewer></ProductViewer>
+      <NavBar />
+      <Hero />
+      <ProductViewer />
+      <Showcase />
     </main>
   )
 }
