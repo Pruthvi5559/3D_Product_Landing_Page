@@ -68,7 +68,8 @@ const Performance = () => {
         <section id="performance" ref={sectionRef}>
             <h2>Next-level graphics performance. Game on.</h2>
 
-             <div className="wrapper">
+            {/* Desktop: absolute-positioned images (animated) */}
+            <div className="wrapper hidden lg:block">
                 {performanceImages.map((item, index) => (
                     <img
                         key={index}
@@ -77,7 +78,19 @@ const Performance = () => {
                         alt={item.alt || `Performance Image #${index + 1}`}
                     />
                 ))}
-             </div>
+            </div>
+
+            {/* Mobile: simple responsive grid */}
+            <div className="perf-grid lg:hidden">
+                {performanceImages.map((item, index) => (
+                    <img
+                        key={index}
+                        src={item.src}
+                        alt={item.alt || `Performance Image #${index + 1}`}
+                        className="perf-grid-img"
+                    />
+                ))}
+            </div>
 
             <div className="content">
                 <p>

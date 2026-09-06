@@ -88,11 +88,12 @@ body {
 }
 
 @layer components {
+  /* ─── NAVBAR ─────────────────────────────────────────── */
   header {
-    @apply w-screen fixed top-0 left-0 z-50 flex-center bg-black min-h-[7vh];
+    @apply w-screen fixed top-0 left-0 z-50 bg-black;
 
     nav {
-      @apply container mx-auto flex-between px-5 2xl:px-0;
+      @apply container mx-auto flex-between px-5 2xl:px-0 min-h-[7vh];
 
       img {
         @apply cursor-pointer hover:-translate-y-0.5 transition-all duration-300 ease-in-out;
@@ -110,55 +111,75 @@ body {
         }
       }
     }
+
+    /* Hamburger bar lines */
+    .hamburger-line {
+      @apply block w-5 h-0.5 bg-white transition-all duration-300 ease-in-out;
+    }
+
+    /* Mobile dropdown */
+    .mobile-menu {
+      @apply w-full bg-black/95 backdrop-blur-md border-t border-white/10 md:hidden;
+
+      ul {
+        @apply flex flex-col py-4 px-5 gap-1;
+
+        a {
+          @apply block text-white opacity-80 font-regular text-base py-3 px-2 border-b border-white/5 cursor-pointer hover:opacity-100 hover:text-primary transition-all duration-200;
+        }
+      }
+    }
   }
 
+  /* ─── HERO ───────────────────────────────────────────── */
   #hero {
-    @apply h-fit lg:h-[80vh] col-center mt-40 lg:mt-20 2xl:mt-[7vh];
+    @apply h-fit lg:h-[80vh] col-center mt-24 sm:mt-28 lg:mt-20 2xl:mt-[7vh];
 
     div {
       @apply relative z-10 col-center lg:translate-y-16;
 
       h1 {
-        @apply font-semibold lg:text-3xl 2xl:text-5xl text-white;
+        @apply font-semibold text-2xl sm:text-3xl lg:text-3xl 2xl:text-5xl text-white;
       }
 
       img {
-        @apply container mx-auto w-2/3;
+        @apply container mx-auto w-4/5 sm:w-3/4 md:w-2/3;
       }
     }
 
     video {
-      @apply mx-auto lg:translate-y-5 2xl:translate-y-0;
+      @apply mx-auto w-full max-w-2xl lg:max-w-none lg:translate-y-5 2xl:translate-y-0 px-4 lg:px-0;
     }
 
     button {
-      @apply relative z-10 bg-primary text-white py-2 px-6 mt-10 lg:mt-0 mb-5 rounded-full font-semibold text-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-300 ease-in-out;
+      @apply relative z-10 bg-primary text-white py-2 px-6 mt-8 lg:mt-0 mb-5 rounded-full font-semibold text-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-300 ease-in-out;
     }
 
     p {
-      @apply lg:h3-semibold base-semibold;
+      @apply lg:h3-semibold base-semibold text-center px-5;
     }
   }
 
+  /* ─── PRODUCT VIEWER ─────────────────────────────────── */
   #product-viewer {
-    @apply container relative min-h-[93vh] mx-auto px-5 2xl:px-0 mt-40;
+    @apply container relative min-h-[93vh] mx-auto px-5 2xl:px-0 mt-20 lg:mt-40;
 
     h2 {
-      @apply text-white font-semibold text-3xl lg:text-6xl;
+      @apply text-white font-semibold text-2xl sm:text-3xl lg:text-6xl;
     }
 
     .controls {
-      @apply absolute z-50 bottom-40 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2;
+      @apply absolute z-50 bottom-6 sm:bottom-10 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2 w-full px-4;
 
       .info {
         @apply text-xs text-white bg-black/20 px-2 py-1 rounded-lg;
       }
 
       .color-control {
-        @apply flex-between bg-neutral-800 rounded-full px-6 py-3 gap-4;
+        @apply flex-between bg-neutral-800 rounded-full px-4 sm:px-6 py-2 sm:py-3 gap-3 sm:gap-4;
 
         div {
-          @apply size-7 rounded-full cursor-pointer;
+          @apply size-6 sm:size-7 rounded-full cursor-pointer;
         }
 
         .active {
@@ -167,19 +188,20 @@ body {
       }
 
       .size-control {
-        @apply small-medium flex-between bg-neutral-800 rounded-full px-6 py-2.5 gap-2;
+        @apply small-medium flex-between bg-neutral-800 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 gap-2;
 
         div {
-          @apply size-8 rounded-full cursor-pointer bg-white text-black flex-center;
+          @apply size-7 sm:size-8 rounded-full cursor-pointer bg-white text-black flex-center;
         }
       }
     }
 
     #canvas {
-      @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
+      @apply !w-full !h-[60vh] sm:!h-[70vh] lg:!h-dvh relative z-40;
     }
   }
 
+  /* ─── SHOWCASE ───────────────────────────────────────── */
   #showcase {
     @apply relative;
 
@@ -209,27 +231,34 @@ body {
     .content {
       @apply relative z-10 my-5 lg:-mt-40 bg-black font-semibold text-xl text-dark-100 lg:opacity-0;
 
+      /* Mobile: always visible */
+      &.mobile-visible {
+        @apply opacity-100;
+      }
+
       .wrapper {
-        @apply container mx-auto px-5 pb-20 2xl:px-0 flex flex-col lg:flex-row justify-center gap-20;
+        @apply container mx-auto px-5 pb-10 lg:pb-20 2xl:px-0 flex flex-col lg:flex-row justify-center gap-10 lg:gap-20;
       }
 
       h2 {
-        @apply font-semibold text-3xl lg:text-7xl text-white;
+        @apply font-semibold text-3xl sm:text-4xl lg:text-7xl text-white;
       }
 
       h3 {
-        @apply font-semibold text-xl lg:text-5xl text-white;
+        @apply font-semibold text-xl sm:text-2xl lg:text-5xl text-white;
       }
     }
   }
 
+  /* ─── PERFORMANCE ────────────────────────────────────── */
   #performance {
-    @apply w-dvw h-full overflow-hidden pt-20 lg:pt-20 flex flex-col items-center relative;
+    @apply w-dvw h-full overflow-hidden pt-12 lg:pt-20 flex flex-col items-center relative;
 
     h2 {
-      @apply font-semibold text-3xl lg:text-6xl text-white max-w-2xl text-center;
+      @apply font-semibold text-2xl sm:text-3xl lg:text-6xl text-white max-w-2xl text-center px-5;
     }
 
+    /* Desktop absolute layout */
     .wrapper {
       @apply w-7xl 2xl:w-[100rem] h-[50vh] lg:h-screen relative;
 
@@ -266,8 +295,17 @@ body {
       }
     }
 
+    /* Mobile grid layout */
+    .perf-grid {
+      @apply grid grid-cols-2 sm:grid-cols-3 gap-3 px-5 mt-8 w-full max-w-lg;
+    }
+
+    .perf-grid-img {
+      @apply w-full rounded-xl object-cover aspect-square;
+    }
+
     .content {
-      @apply mx-auto max-w-xl mt-24;
+      @apply mx-auto max-w-xl mt-10 lg:mt-24;
 
       p {
         @apply lg:h3-semibold base-semibold text-center translate-y-10 opacity-0 px-5;
@@ -275,17 +313,19 @@ body {
     }
   }
 
+  /* ─── FEATURES ───────────────────────────────────────── */
   #features {
-    @apply pt-40 relative;
+    @apply pt-20 lg:pt-40 relative;
 
     h2 {
-      @apply text-white font-semibold text-3xl lg:text-7xl text-center max-w-3xl mx-auto;
+      @apply text-white font-semibold text-2xl sm:text-3xl lg:text-7xl text-center max-w-3xl mx-auto px-5;
     }
 
     #f-canvas {
-      @apply !w-full !h-dvh relative z-40;
+      @apply !w-full !h-[50vh] sm:!h-[60vh] lg:!h-dvh relative z-40;
     }
 
+    /* Desktop overlay boxes */
     .box {
       @apply max-w-xs absolute;
 
@@ -293,42 +333,60 @@ body {
         @apply lg:h3-semibold base-semibold;
       }
     }
+
+    /* Mobile feature list */
+    .features-list {
+      @apply px-5 py-8 flex flex-col gap-6 max-w-lg mx-auto;
+    }
+
+    .feature-item {
+      @apply flex items-start gap-4 bg-neutral-900 rounded-2xl p-5;
+
+      p {
+        @apply base-semibold leading-relaxed;
+      }
+    }
+
+    .feature-icon {
+      @apply w-10 h-10 flex-shrink-0 mt-0.5;
+    }
   }
 
+  /* ─── HIGHLIGHTS ─────────────────────────────────────── */
   #highlights {
-    @apply container mx-auto lg:py-40 max-lg:px-5;
+    @apply container mx-auto py-16 lg:py-40 max-lg:px-5;
 
     h2 {
-      @apply text-white font-semibold text-3xl lg:text-7xl text-center max-w-3xl mx-auto;
+      @apply text-white font-semibold text-2xl sm:text-3xl lg:text-7xl text-center max-w-3xl mx-auto;
     }
 
     h3 {
-      @apply text-[#F5F5F7] font-semibold text-xl lg:text-3xl text-center mt-10;
+      @apply text-[#F5F5F7] font-semibold text-lg sm:text-xl lg:text-3xl text-center mt-6 lg:mt-10;
     }
 
     .masonry {
-      @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-20 text-[#F5F5F7];
+      @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 lg:mt-20 text-[#F5F5F7];
 
       .left-column {
         @apply flex flex-col justify-between gap-5 opacity-0 -translate-y-5;
 
         div:first-of-type {
-          @apply h-full bg-[url(/highlight-bg.png)] bg-no-repeat bg-cover p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
+          @apply h-full bg-[url(/highlight-bg.png)] bg-no-repeat bg-cover p-8 lg:p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
 
           p {
-            @apply font-semibold text-4xl max-w-2xs;
+            @apply font-semibold text-3xl sm:text-4xl max-w-2xs;
           }
         }
 
         p {
-          @apply font-semibold text-4xl max-w-2xs;
+          @apply font-semibold text-3xl sm:text-4xl max-w-2xs;
         }
 
         div:last-of-type {
-          @apply bg-[#1D1D1F] p-10 rounded-3xl flex items-center gap-7;
+          @apply bg-[#1D1D1F] p-8 lg:p-10 rounded-3xl flex items-center gap-5 lg:gap-7;
 
           p {
-            @apply font-semibold lg:text-2xl 2xl:text-3xl;
+            @apply font-semibold text-lg sm:text-xl lg:text-2xl 2xl:text-3xl;
           }
         }
       }
@@ -337,14 +395,14 @@ body {
         @apply flex flex-col justify-between gap-5 opacity-0 -translate-y-5;
 
         p {
-          @apply font-semibold text-4xl max-w-2xs;
+          @apply font-semibold text-3xl sm:text-4xl max-w-2xs;
         }
         .apple-gradient {
-          @apply p-10 rounded-3xl flex items-center gap-7 relative;
+          @apply p-8 lg:p-10 rounded-3xl flex items-center gap-5 lg:gap-7 relative;
 
           background: #1d1d1f;
-          background-clip: padding-box; /* !important */
-          border: 3px solid transparent; /* !important */
+          background-clip: padding-box;
+          border: 3px solid transparent;
 
           ::before {
             content: "";
@@ -352,8 +410,8 @@ body {
             position: absolute;
             inset: 0px;
             z-index: -1;
-            margin: -5px; /* !important */
-            border-radius: 24px; /* !important */
+            margin: -5px;
+            border-radius: 24px;
             background: linear-gradient(
               91deg,
               #0096ff 0%,
@@ -364,7 +422,7 @@ body {
           }
 
           p {
-            @apply font-semibold lg:text-2xl 2xl:text-3xl;
+            @apply font-semibold text-lg sm:text-xl lg:text-2xl 2xl:text-3xl;
 
             span {
               background: linear-gradient(
@@ -382,10 +440,10 @@ body {
         }
 
         div:last-of-type {
-          @apply h-full bg-[#1D1D1F] p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
+          @apply h-full bg-[#1D1D1F] p-8 lg:p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
 
           p {
-            @apply font-semibold text-4xl max-w-sm;
+            @apply font-semibold text-3xl sm:text-4xl max-w-sm;
 
             .green-gradient {
               background: linear-gradient(90deg, #35a98a 0%, #6dd400 100%);
@@ -399,11 +457,12 @@ body {
     }
   }
 
+  /* ─── FOOTER ─────────────────────────────────────────── */
   footer {
     @apply container mx-auto py-7 max-lg:px-5;
 
     .info {
-      @apply flex-between;
+      @apply flex flex-col sm:flex-between gap-3 sm:gap-0;
 
       p {
         @apply text-sm font-medium;
@@ -422,7 +481,7 @@ body {
       @apply flex flex-col lg:flex-row lg:items-center justify-between max-lg:mt-5 gap-5 text-sm;
 
       ul {
-        @apply lg:divide-x flex flex-col lg:flex-row gap-2.5;
+        @apply lg:divide-x flex flex-wrap lg:flex-row gap-2.5;
 
         li {
           @apply lg:px-5 cursor-pointer hover:text-primary transition-all duration-300 ease-in-out;

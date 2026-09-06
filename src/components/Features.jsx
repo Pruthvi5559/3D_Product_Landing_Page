@@ -87,27 +87,57 @@ const ModelScroll = () => {
 }
 
 const Features = () => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
     return (
         <section id="features">
             <h2>See it all in a new light.</h2>
 
-            <Canvas id="f-canvas" camera={{}}>
-                <StudioLights />
-                <ambientLight intensity={0.5} />
-                <ModelScroll />
-            </Canvas>
+            {/* Desktop: 3D canvas with overlaid feature boxes */}
+            {!isMobile && (
+                <div className="relative">
+                    <Canvas id="f-canvas" camera={{}}>
+                        <StudioLights />
+                        <ambientLight intensity={0.5} />
+                        <ModelScroll />
+                    </Canvas>
 
-            <div className="absolute inset-0">
-                {features.map((feature, index) => (
-                    <div key={feature.id} className={clsx('box', `box${index + 1}`, feature.styles)}>
-                        <img src={feature.icon} alt={feature.highlight} />
-                        <p>
-                            <span className="text-white">{feature.highlight}</span>
-                            {feature.text}
-                        </p>
+                    <div className="absolute inset-0 pointer-events-none">
+                        {features.map((feature, index) => (
+                            <div key={feature.id} className={clsx('box', `box${index + 1}`, feature.styles)}>
+                                <img src={feature.icon} alt={feature.highlight} />
+                                <p>
+                                    <span className="text-white">{feature.highlight}</span>
+                                    {feature.text}
+                                </p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </div>
+            )}
+
+            {/* Mobile: static canvas + feature list below */}
+            {isMobile && (
+                <>
+                    <Canvas id="f-canvas" camera={{}}>
+                        <StudioLights />
+                        <ambientLight intensity={0.5} />
+                        <ModelScroll />
+                    </Canvas>
+
+                    <div className="features-list">
+                        {features.map((feature) => (
+                            <div key={feature.id} className="feature-item">
+                                <img src={feature.icon} alt={feature.highlight} className="feature-icon" />
+                                <p>
+                                    <span className="text-white">{feature.highlight} </span>
+                                    {feature.text}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
         </section>
     )
 }
